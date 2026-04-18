@@ -12,6 +12,15 @@
         "name": "sashadev-sky"
       },
       "version": "1.0.0"
+    },
+    {
+      "name": "claude-commandz",
+      "source": "./",
+      "description": "Create new slash commands with standardized structure",
+      "author": {
+        "name": "sashadev-sky"
+      },
+      "version": "1.0.0"
     }
   ]
 }

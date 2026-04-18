@@ -1,0 +1,17 @@
+{
+  "name": "claude-pluginz",
+  "owner": {
+    "name": "sashadev-sky"
+  },
+  "plugins": [
+    {
+      "name": "session-logger",
+      "source": "./plugins/session-logger-plugin",
+      "description": "Log session summaries to a markdown file",
+      "author": {
+        "name": "sashadev-sky"
+      },
+      "version": "1.0.0"
+    }
+  ]
+}

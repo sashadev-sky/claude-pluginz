@@ -1,4 +1,4 @@
-# claude-plugins
+# claude-pluginz
 
 Marketplace catalog called `claude-pluginz` that lists my plugins.
 

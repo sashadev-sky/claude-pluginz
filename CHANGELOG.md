@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.3.0 - 2026-04-28
+## 1.4.0 - 2026-04-28
 
 ### Deleted
 
@@ -9,4 +9,4 @@
 
 ### Added
 
-- a `claude-code-wrapped` plugin.
+- `coding-journal` plugin.

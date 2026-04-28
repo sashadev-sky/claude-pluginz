@@ -3,7 +3,7 @@ name: log-session-summary
 description: Append a structured summary of the current session to SESSION_LOG.md
 metadata:
   author: sashadev-sky
-  version: 1.0.0
+  version: "1.2.0"
 disable-model-invocation: true
 ---
 

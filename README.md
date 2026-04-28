@@ -8,8 +8,8 @@ Add the marketplace, then install whatever you need:
 
 ```shell
 /plugin marketplace add sashadev-sky/claude-pluginz
-/plugin install log-session-summary@claude-pluginz
-/plugin install claude-code-wrapped@claude-pluginz
+/plugin install project-continuity@claude-pluginz
+/plugin install coding-journal@claude-pluginz
 ```
 
 ## Catalog

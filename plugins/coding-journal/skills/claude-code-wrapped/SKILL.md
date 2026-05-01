@@ -5,7 +5,7 @@ compatibility: Requires Python 3.14+ and uv. Designed for Claude Code (or simila
 allowed-tools: Bash(uv:*)
 metadata:
   author: sashadev-sky
-  version: "1.7.0"
+  version: "1.8.0"
 ---
 
 ## How to launch

@@ -18,14 +18,14 @@ Add the marketplace, then install whatever you need:
 
 Bundles of skills installable via `/plugin install`.
 
-| Name | Skill | Description | How to trigger |
-|------|-------|-------------|----------------|
-| [`coding-journal`](./skills/claude-code-wrapped) | `claude-code-wrapped` | Interactive Spotify Wrapped-style terminal slideshow of your Claude Code usage stats | Say "show me my Claude Code stats" or "launch wrapped" |
-| [`project-continuity`](./skills/log-session-summary) | `log-session-summary` | Append a structured summary of the current session to a `SESSION_LOG.md` file | Say "log session summary" or "save session log" |
+| Name | Skill | Description | Usage |
+|------|-------|-------------|-------|
+| [`coding-journal`](./plugins/coding-journal/skills/claude-code-wrapped) | `claude-code-wrapped` | Interactive Spotify Wrapped-style terminal slideshow of your Claude Code usage stats | `/coding-journal:claude-code-wrapped` |
+| [`project-continuity`](./plugins/project-continuity/skills/log-session-summary) | `log-session-summary` | Append a structured summary of the current session to a `SESSION_LOG.md` file | `/project-continuity:log-session-summary` |
 
 ## Repo layout
 
-```
+```txt
 claude-pluginz/
 ├── .claude-plugin/
 │   └── marketplace.json              # marketplace manifest
@@ -50,11 +50,17 @@ Navigate to any project where you want to use the plugin, then start Claude Code
 
 ```shell
 cd ~/your-project
-claude --plugin-dir ~/claude-plugins/skills/claude-code-wrapped
-claude --plugin-dir ~/claude-plugins/skills/log-session-summary
+claude --plugin-dir ~/claude-plugins/plugins/coding-journal/skills/claude-code-wrapped
+claude --plugin-dir ~/claude-plugins/plugins/project-continuity/skills/log-session-summary
 ```
 
 ### Validation
+
+Validate your marketplace JSON syntax:
+
+```shell
+claude plugin validate .
+```
 
 Use the **`skills-ref`** reference library to validate skills:
 

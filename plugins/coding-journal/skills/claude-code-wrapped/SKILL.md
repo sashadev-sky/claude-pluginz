@@ -3,9 +3,6 @@ name: claude-code-wrapped
 description: Launch Claude Code Wrapped — an interactive Spotify Wrapped-style terminal slideshow of your Claude Code usage stats. Shows animated slides inline covering total sessions, projects, most-used tools, token usage, peak hours, longest session, and a personalized "Claude Code identity" based on your habits. Use this skill whenever the user asks about their Claude Code usage, stats, history, or says "wrapped", "year in review", "show me my stats", "how much have I used Claude", "what have I been working on", "my coding stats", "Claude Code story", or wants to celebrate or review their Claude Code activity. Trigger proactively — if the user seems curious about their usage patterns, offer to launch it.
 compatibility: Requires Python 3.14+ and uv. Designed for Claude Code (or similar products).
 allowed-tools: Bash(uv:*)
-metadata:
-  author: sashadev-sky
-  version: "1.8.0"
 ---
 
 ## How to launch

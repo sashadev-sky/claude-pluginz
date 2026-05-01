@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "claude-code-wrapped",
+      "type": "skill-md",
+      "description": "Launch Claude Code Wrapped — an interactive Spotify Wrapped-style terminal slideshow of your Claude Code usage stats. Shows animated slides inline covering total sessions, projects, most-used tools, token usage, peak hours, longest session, and a personalized \"Claude Code identity\" based on your habits.",
+      "url": "https://raw.githubusercontent.com/sashadev-sky/claude-pluginz/main/plugins/coding-journal/skills/claude-code-wrapped/SKILL.md",
+      "digest": "sha256:bd03548ad9fa5aa0d4cf34a09f1122d1227b7e1668d7ecf8fd4278963728b1c4"
+    },
+    {
+      "name": "log-session-summary",
+      "type": "skill-md",
+      "description": "Append a structured summary of the current session to SESSION_LOG.md",
+      "url": "https://raw.githubusercontent.com/sashadev-sky/claude-pluginz/main/plugins/project-continuity/skills/log-session-summary/SKILL.md",
+      "digest": "sha256:d35beb5e1cc7991e6d6bf075393bf3339c9ad91703eda2baeb102d74b696b5da"
+    }
+  ]
+}

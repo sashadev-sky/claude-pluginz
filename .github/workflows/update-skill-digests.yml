@@ -1,0 +1,62 @@
+name: Update skill digests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "plugins/**/skills/**/SKILL.md"
+
+jobs:
+  update-digests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Recompute digests and update index.json
+        run: |
+          INDEX=".well-known/agent-skills/index.json"
+
+          # For each skill in the index, find its SKILL.md under plugins/ and recompute
+          python3 - <<'EOF'
+          import hashlib, json, pathlib, sys
+
+          index_path = pathlib.Path(".well-known/agent-skills/index.json")
+          data = json.loads(index_path.read_text())
+
+          BASE = "https://raw.githubusercontent.com/${{ github.repository }}/main/"
+          changed = False
+
+          for skill in data["skills"]:
+              url = skill.get("url", "")
+              if not url.startswith(BASE):
+                  continue
+              rel = url[len(BASE):]
+              p = pathlib.Path(rel)
+              if not p.exists():
+                  print(f"WARNING: {p} not found, skipping", file=sys.stderr)
+                  continue
+              digest = "sha256:" + hashlib.sha256(p.read_bytes()).hexdigest()
+              if skill.get("digest") != digest:
+                  print(f"  {skill['name']}: {skill.get('digest')} -> {digest}")
+                  skill["digest"] = digest
+                  changed = True
+
+          if changed:
+              index_path.write_text(json.dumps(data, indent=2) + "\n")
+              print("index.json updated")
+          else:
+              print("No digest changes")
+          EOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet .well-known/agent-skills/index.json || (
+            git add .well-known/agent-skills/index.json &&
+            git commit -m "chore: update skill digests [skip ci]"  &&
+            git push
+          )

@@ -1,0 +1,16 @@
+{
+  "description": "Block model-initiated invocation of log-session-summary. User slash-command invocations bypass the Skill tool path and remain allowed.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/block-model-skill.sh log-session-summary"
+          }
+        ]
+      }
+    ]
+  }
+}

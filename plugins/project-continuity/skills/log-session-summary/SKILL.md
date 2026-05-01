@@ -1,7 +1,6 @@
 ---
 name: log-session-summary
-description: Append a structured summary of the current session to SESSION_LOG.md
-disable-model-invocation: true
+description: Append a structured summary of the current session to SESSION_LOG.md. Use ONLY when the user explicitly invokes the /project-continuity:log-session-summary command; do not trigger on general mentions of session logs, summaries, or project history.
 ---
 
 When invoked, review the conversation and create a summary with these sections:

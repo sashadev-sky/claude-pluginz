@@ -29,18 +29,27 @@ Bundles of skills installable via `/plugin install`.
 claude-pluginz/
 ├── .claude-plugin/
 │   └── marketplace.json              # marketplace manifest
-└── skills/
-    ├── claude-code-wrapped/          # coding-journal plugin
+└── plugins/
+    ├── coding-journal/
     │   ├── .claude-plugin/
     │   │   └── plugin.json           # plugin manifest
-    │   ├── scripts/                  # python implementation
-    │   │   ├── __init__.py
-    │   │   └── wrapped.py
-    │   └── SKILL.md                  # skill definition + frontmatter
-    └── log-session-summary/          # project-continuity plugin
+    │   └── skills/
+    │       └── claude-code-wrapped/
+    │           ├── scripts/          # python implementation
+    │           │   ├── __init__.py
+    │           │   └── wrapped.py
+    │           └── SKILL.md          # skill definition + frontmatter
+    └── project-continuity/
         ├── .claude-plugin/
         │   └── plugin.json           # plugin manifest
-        └── SKILL.md                  # skill definition + frontmatter
+        ├── hooks/
+        │   ├── block-model-skill.sh  # hook implementation
+        │   └── hooks.json            # hook configuration
+        └── skills/
+            └── log-session-summary/
+                ├── evals/            # skill eval suite
+                │   └── evals.json
+                └── SKILL.md          # skill definition + frontmatter
 ```
 
 ## Test locally
@@ -68,12 +77,30 @@ claude plugin validate .
 Use the **`skills-ref`** reference library to validate skills:
 
 ```shell
-npx -y skills-ref validate ./skills/<skill_name>
+npx -y skills-ref validate <path_to_skill_name>
 ```
 
 This checks that your `SKILL.md` frontmatter is valid and follows all naming conventions according to the [**Agent Skills standard**](https://agentskills.io/).
 
+## Hooks
+
+The hooks are in place of `disable-model-invocation:  true` in `log-session-summary`, which is not considered a valid value in the Agent Skills specification.
+
+## Evals
+
+The evals are teting the hooks worked as expted - ie. the skill `project-continuity/log-session-summary` could only be directly involved by the user.
+
+Prompt:
+> _"Use the skill-creator skill to run the evals at
+plugins/project-continuity/skills/log-session-summary/evals/evals.json
+against the skill at plugins/project-continuity/skills/log-session-summary.
+The evals already have assertions, so skip drafting and go straight to:
+spawn with-skill + baseline subagents per test case, save under
+plugins/project-continuity/skills/log-session-summary-workspace/iteration-2/,
+grade, aggregate into benchmark.json, and open the eval viewer with
+--previous-workspace plugins/project-continuity/skills/log-session-summary-workspace/iteration-1."_
+
 ## Resources
 
-- [Specification](https://agentskills.io/specification)
-- [Create and distribute a plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces#create-the-marketplace-file)
+- [Agent Skills Specification](https://agentskills.io/specification)
+- [Create and distribute a plugin marketplace (Claude Code)](https://code.claude.com/docs/en/plugin-marketplaces#create-the-marketplace-file)

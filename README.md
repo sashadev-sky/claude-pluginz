@@ -35,7 +35,6 @@ claude-pluginz/
     │   │   └── plugin.json           # plugin manifest
     │   ├── scripts/                  # python implementation
     │   │   ├── __init__.py
-    │   │   ├── launch_wrapped.py
     │   │   └── wrapped.py
     │   └── SKILL.md                  # skill definition + frontmatter
     └── log-session-summary/          # project-continuity plugin
@@ -49,9 +48,13 @@ claude-pluginz/
 Navigate to any project where you want to use the plugin, then start Claude Code with the `--plugin-dir` flag pointing to the skill directory:
 
 ```shell
-cd ~/your-project
-claude --plugin-dir ~/claude-plugins/plugins/coding-journal/skills/claude-code-wrapped
-claude --plugin-dir ~/claude-plugins/plugins/project-continuity/skills/log-session-summary
+claude --plugin-dir ~/claude-plugins/plugins/coding-journal/
+/coding-journal:claude-code-wrapped
+```
+
+```shell
+claude --plugin-dir ~/claude-plugins/plugins/project-continuity/
+project-continuity/log-session-summary
 ```
 
 ### Validation

@@ -2,7 +2,8 @@
   "name": "claude-pluginz",
   "metadata": {
     "description": "A personal marketplace of bundles of skills",
-    "version": "1.6.0"
+    "pluginRoot": "./plugins",
+    "version": "1.7.0"
   },
   "owner": {
     "name": "sashadev-sky"
@@ -10,9 +11,8 @@
   "plugins": [
     {
       "name": "project-continuity",
-      "source": "./plugins/project-continuity",
+      "source": "./project-continuity",
       "description": "Collection of project continuity capabilities across sessions.",
-      "version": "1.5.0",
       "category": "development",
       "tags": [
         "skills"
@@ -20,9 +20,8 @@
     },
     {
       "name": "coding-journal",
-      "source": "./plugins/coding-journal",
+      "source": "./coding-journal",
       "description": "Launch Claude Code Wrapped — an interactive Spotify Wrapped-style terminal slideshow of your Claude Code usage stats. Opens a new terminal window showing animated slides covering total sessions, projects, most-used tools, token usage, peak hours, longest session, and a personalized 'Claude Code identity' based on your habits. Use this skill whenever the user asks about their Claude Code usage, stats, history, or says 'wrapped', 'year in review', 'show me my stats', 'how much have I used Claude', 'what have I been working on', 'my coding stats', 'Claude Code story', or wants to celebrate or review their Claude Code activity. Trigger proactively — if the user seems curious about their usage patterns, offer to launch it.",
-      "version": "1.6.0",
       "category": "productivity",
       "tags": [
         "skills"

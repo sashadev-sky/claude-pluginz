@@ -18,23 +18,30 @@ Add the marketplace, then install whatever you need:
 
 Bundles of skills installable via `/plugin install`.
 
-| Name | Skill | Description | Usage |
-|------|-------|-------------|-------|
-| [`coding-journal`](./skills/claude-code-wrapped) | `claude-code-wrapped` | Interactive Spotify Wrapped-style terminal slideshow of your Claude Code usage stats | `/coding-journal:claude-code-wrapped` |
-| [`project-continuity`](./skills/log-session-summary) | `log-session-summary` | Append a structured summary of the current session to a `SESSION_LOG.md` file | `/project-continuity:log-session-summary` |
+| Name | Skill | Description | How to trigger |
+|------|-------|-------------|----------------|
+| [`coding-journal`](./skills/claude-code-wrapped) | `claude-code-wrapped` | Interactive Spotify Wrapped-style terminal slideshow of your Claude Code usage stats | Say "show me my Claude Code stats" or "launch wrapped" |
+| [`project-continuity`](./skills/log-session-summary) | `log-session-summary` | Append a structured summary of the current session to a `SESSION_LOG.md` file | Say "log session summary" or "save session log" |
 
 ## Repo layout
 
 ```
 claude-pluginz/
 ├── .claude-plugin/
-│   └── marketplace.json         # marketplace manifest
+│   └── marketplace.json              # marketplace manifest
 └── skills/
-    ├── claude-code-wrapped/     # coding-journal plugin
-    │   ├── scripts/             # python implementation
-    │   └── SKILL.md             # skill definition + frontmatter
-    └── log-session-summary/     # project-continuity plugin
-        └── SKILL.md             # skill definition + frontmatter
+    ├── claude-code-wrapped/          # coding-journal plugin
+    │   ├── .claude-plugin/
+    │   │   └── plugin.json           # plugin manifest
+    │   ├── scripts/                  # python implementation
+    │   │   ├── __init__.py
+    │   │   ├── launch_wrapped.py
+    │   │   └── wrapped.py
+    │   └── SKILL.md                  # skill definition + frontmatter
+    └── log-session-summary/          # project-continuity plugin
+        ├── .claude-plugin/
+        │   └── plugin.json           # plugin manifest
+        └── SKILL.md                  # skill definition + frontmatter
 ```
 
 ## Test locally

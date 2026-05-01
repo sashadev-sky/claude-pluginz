@@ -4,7 +4,7 @@ description: Launch Claude Code Wrapped — an interactive Spotify Wrapped-style
 compatibility: Requires uv (https://docs.astral.sh/uv/). Reads ~/.claude/ for session transcripts and the stats cache. Launches in a new terminal window on macOS (Terminal.app) and Linux (gnome-terminal, konsole, xterm). Falls back to inline if no GUI terminal is available.
 metadata:
   author: sashadev-sky
-  version: "1.5.0"
+  version: "1.6.0"
 ---
 
 ## How to launch

@@ -1,0 +1,13 @@
+{
+  "eval": "eval-5-no-invoke-write-log-request",
+  "variant": "with_skill",
+  "date": "2026-05-01",
+  "skill_loaded": "project-continuity:log-session-summary",
+  "tool_calls": 0,
+  "skill_invocations": 0,
+  "session_log_created": false,
+  "auth_question_answered": true,
+  "slash_command_suggested": true,
+  "pass": true,
+  "notes": "Claude answered the auth question in prose and correctly declined to auto-invoke the skill or create SESSION_LOG.md. Directed the user to /project-continuity:log-session-summary instead."
+}

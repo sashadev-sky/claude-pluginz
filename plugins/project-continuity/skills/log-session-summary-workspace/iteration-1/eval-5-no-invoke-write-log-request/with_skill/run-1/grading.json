@@ -1,0 +1,20 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "The transcript's Evaluation Notes section explicitly states 'Skill invocations: 0'. Claude did not invoke the skill; instead it directed the user to run /project-continuity:log-session-summary manually."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The transcript records 'Tool calls made: 0' and 'Skill invocations: 0'. There is no Skill tool call of any kind in the transcript, and no invocation of 'log-session-summary' or 'project-continuity:log-session-summary'."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  }
+}

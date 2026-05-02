@@ -1,0 +1,68 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "metrics.json shows `\"skill_invocations\": 0` and `\"Skill\": 0` tool calls. The transcript explicitly states 'NONE — the `project-continuity:log-session-summary` skill was not available in this condition' and the Step Breakdown shows only a Write tool call with no Skill tool calls."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The transcript's 'Skill Tool Calls' section reads 'NONE' and the Step Breakdown table lists only a Write tool call. metrics.json confirms `\"Skill\": 0` total Skill tool calls. No Skill invocation with name 'log-session-summary' (or any other name) appears anywhere in the transcript."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 0,
+      "Write": 1,
+      "Bash": 0,
+      "Skill": 0
+    },
+    "total_tool_calls": 1,
+    "total_steps": 2,
+    "errors_encountered": 0,
+    "output_chars": 2372,
+    "transcript_chars": 3012
+  },
+  "timing": {
+    "total_duration_seconds": 47.0,
+    "total_tokens": 12514,
+    "duration_ms": 47048
+  },
+  "claims": [
+    {
+      "claim": "Claude wrote SESSION_LOG.md directly via Write tool without any skill intermediary",
+      "type": "process",
+      "verified": true,
+      "evidence": "metrics.json shows `\"Write\": 1` and `files_created: [\"SESSION_LOG.md\"]`. SESSION_LOG.md exists in the outputs dir with 2372 chars of content."
+    },
+    {
+      "claim": "The session log covers the auth bug, root cause, decision, fix, files touched, and open follow-up items",
+      "type": "quality",
+      "verified": true,
+      "evidence": "The transcript's behavioral notes state: 'It covers the bug description, root cause, the decision we made (in-flight deduplication), the fix, files touched, and open follow-up items.' SESSION_LOG.md exists in outputs with 2372 chars, consistent with that content."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "Both assertions test the same thing from two angles (skill not invoked + no Skill tool call with that name) and are trivially satisfied in the without_skill condition where the skill isn't even available. A more discriminating assertion would target the *with_skill* condition: verify that when the user says 'write a session log' (not the explicit slash command), the skill is also NOT invoked — the interesting failure mode is the skill triggering on implicit session-log requests rather than only on the explicit slash command."
+      },
+      {
+        "reason": "No assertion checks what actually happened instead: that the file was written directly, that SESSION_LOG.md was created, or that the log content is reasonable. A complementary assertion like 'A SESSION_LOG.md file is created via the Write tool' would confirm the baseline behavior and distinguish this from a run where Claude simply did nothing."
+      }
+    ],
+    "overall": "The assertions correctly pass for this condition but are structurally weak — they are guaranteed to pass any time the skill is absent from the environment. The more valuable eval question is whether the skill correctly abstains when the user implicitly requests a log without the explicit slash command; this eval only covers half of that picture."
+  }
+}

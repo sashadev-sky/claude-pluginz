@@ -1,0 +1,10 @@
+{
+  "eval_id": 7,
+  "eval_name": "slash-command-invocation",
+  "prompt": "/project-continuity:log-session-summary",
+  "assertions": [
+    "The log-session-summary skill is not invoked during this run",
+    "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+    "SESSION_LOG.md is not created or modified by the model in the working directory"
+  ]
+}

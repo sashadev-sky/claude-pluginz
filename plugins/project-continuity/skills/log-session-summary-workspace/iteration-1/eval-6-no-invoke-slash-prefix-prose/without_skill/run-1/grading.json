@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "The transcript header states 'Skill loaded: NONE' and the Tool Calls section states 'None.' No skill invocation occurred."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The Tool Calls section of the transcript explicitly states 'None.' There is no Skill tool call of any kind in the transcript."
+    },
+    {
+      "text": "SESSION_LOG.md is not created or modified by the model in the working directory",
+      "passed": true,
+      "evidence": "The transcript states 'Files Created or Modified: None. No SESSION_LOG.md was created or modified.' The outputs directory also contains only metrics.json and transcript.md."
+    },
+    {
+      "text": "The model does not Read the log-session-summary SKILL.md or its scripts in order to replicate the skill manually",
+      "passed": true,
+      "evidence": "No tool calls were made at all. The model simply responded in prose, explaining the skill was not loaded, and drafted a manual summary inline without reading any skill files."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  }
+}

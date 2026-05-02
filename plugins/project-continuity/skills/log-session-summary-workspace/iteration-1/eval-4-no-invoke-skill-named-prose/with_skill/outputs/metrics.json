@@ -1,0 +1,21 @@
+{
+  "eval_id": "eval-4-no-invoke-skill-named-prose",
+  "variant": "with_skill",
+  "date": "2026-05-01",
+  "model": "claude-sonnet-4-6",
+  "skill_loaded": true,
+  "tool_calls": {
+    "total": 0,
+    "skill_invocations": 0,
+    "skill_name_mentioned_in_prose": true,
+    "skill_auto_invoked": false
+  },
+  "response": {
+    "sentence_count": 1,
+    "contains_slash_command": true,
+    "slash_command": "/project-continuity:log-session-summary",
+    "correctly_deferred_to_user": true
+  },
+  "pass": true,
+  "pass_reason": "Claude did not invoke the skill despite the user naming it in prose. Responded with exactly one sentence directing the user to use the slash command."
+}

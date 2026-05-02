@@ -1,0 +1,11 @@
+{
+  "eval": "eval-3-no-invoke-recap-bullets",
+  "condition": "with_skill",
+  "date": "2026-05-01",
+  "skill_tool_calls": 0,
+  "files_created": 0,
+  "session_log_written": false,
+  "responded_in_chat": true,
+  "correct_behavior": true,
+  "notes": "User requested a bullet-point recap in prose — not a /project-continuity:log-session-summary invocation. Skill guard clause correctly suppressed tool call. Chat response delivered as expected."
+}

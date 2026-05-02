@@ -1,0 +1,17 @@
+{
+  "eval": "eval-6-no-invoke-slash-prefix-prose",
+  "variant": "without_skill",
+  "skill_loaded": false,
+  "tool_calls": 0,
+  "skill_invoked": false,
+  "session_log_created": false,
+  "session_log_modified": false,
+  "response_type": "prose_explanation",
+  "response_behaviors": [
+    "acknowledged_unrecognized_slash_command",
+    "explained_skill_not_installed",
+    "offered_manual_alternative",
+    "drafted_manual_summary_from_prose_context"
+  ],
+  "notes": "Claude received the prompt as a regular message (host did not parse it as a slash command due to trailing prose). With no skill loaded, Claude has no Skill tool to invoke. It responded by explaining the command is not available and offering a manual draft summary. No files were created or modified."
+}

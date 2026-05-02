@@ -1,5 +1,5 @@
 {
   "name": "coding-journal",
   "description": "Launch Claude Code Wrapped — an interactive Spotify Wrapped-style terminal slideshow of your Claude Code usage stats. Opens a new terminal window showing animated slides covering total sessions, projects, most-used tools, token usage, peak hours, longest session, and a personalized 'Claude Code identity' based on your habits. Use this skill whenever the user asks about their Claude Code usage, stats, history, or says 'wrapped', 'year in review', 'show me my stats', 'how much have I used Claude', 'what have I been working on', 'my coding stats', 'Claude Code story', or wants to celebrate or review their Claude Code activity. Trigger proactively — if the user seems curious about their usage patterns, offer to launch it.",
-  "version": "1.9.0"
+  "version": "1.10.1"
 }

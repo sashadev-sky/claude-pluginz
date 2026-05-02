@@ -1,6 +1,16 @@
 {
-  "description": "Block model-initiated invocation of log-session-summary. User slash-command invocations bypass the Skill tool path and remain allowed.",
+  "description": "Map the exact bare $project-continuity plugin invocation to a one-shot log-session-summary skill call, and block other model-initiated log-session-summary skill calls. User slash-command invocations remain allowed.",
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 hooks/block-bare-invocation.py"
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Skill",

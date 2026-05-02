@@ -1,0 +1,20 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "The transcript's 'Skill tool calls' section explicitly states 'NONE \u2014 no skill loaded in this run'. Claude manually wrote a session log file instead of invoking any skill."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "No Skill tool call of any kind appears in the transcript. The transcript confirms no skill was loaded or invoked, and the response explicitly notes 'No session-logging skill is loaded in this session, so there's no automated workflow to write a structured log.'"
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "eval": "eval-2-no-invoke-log-mention",
+  "condition": "without_skill",
+  "date": "2026-05-01",
+  "skill_tool_calls": 0,
+  "files_created": 0,
+  "session_log_written": false,
+  "offered_inline_summary": true,
+  "explained_missing_capability": true,
+  "pass": true,
+  "notes": "Claude provided an inline prose summary and explained it lacked session-logging capability. No Skill tool was invoked, no SESSION_LOG.md was written to disk."
+}

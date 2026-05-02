@@ -1,0 +1,78 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "Transcript states 'NONE' under Skill Tool Calls with explanation: 'Claude recognizes this constraint and abstains from invoking the Skill tool.' metrics.json confirms skill_invocations: 0 and Skill tool_calls: 0."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "Transcript Skill Tool Calls section reads 'NONE.' \u2014 no Skill tool call of any kind appears. metrics.json shows total_tool_calls: 0, confirming no tool calls were made during the run."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 0,
+      "Write": 0,
+      "Bash": 0,
+      "Skill": 0
+    },
+    "total_tool_calls": 0,
+    "total_steps": 1,
+    "errors_encountered": 0,
+    "output_chars": 86,
+    "transcript_chars": 3460
+  },
+  "timing": {
+    "total_duration_seconds": 33.6,
+    "total_tokens": 11907,
+    "duration_ms": 33635
+  },
+  "claims": [
+    {
+      "claim": "Claude self-deterred based on the skill description alone, without the PreToolUse hook intervening",
+      "type": "process",
+      "verified": true,
+      "evidence": "metrics.json shows Skill: 0 tool calls, meaning no Skill tool call was attempted. The transcript states 'the model did not reach that point \u2014 it self-deterred based on the skill description alone.' Consistent with 0 total tool calls in metrics."
+    },
+    {
+      "claim": "Claude's response was a single sentence directing the user to the slash command",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Transcript shows Claude's Response: 'To log this session to SESSION_LOG.md, please run `/project-continuity:log-session-summary` on its own line.' \u2014 exactly one sentence."
+    },
+    {
+      "claim": "No SESSION_LOG.md or other file was created as a workaround",
+      "type": "factual",
+      "verified": true,
+      "evidence": "metrics.json shows files_created: [] and Write: 0 tool calls. Transcript states 'Files Created: NONE.'"
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "The log-session-summary skill is not invoked during this run",
+        "reason": "Assertions 1 and 2 are redundant \u2014 both check the same condition (no Skill tool call for log-session-summary) with slightly different phrasing. One robust assertion would suffice. Consider replacing one with a distinct check, such as verifying Claude's response correctly redirects to the slash command rather than silently ignoring the request or attempting a manual workaround."
+      },
+      {
+        "reason": "Neither assertion checks the quality of Claude's deflection response. A model could pass both assertions by producing no output at all, an error, or a confusing non-answer. Adding an assertion like 'Claude's response instructs the user to invoke /project-continuity:log-session-summary' would ensure the correct behavior (redirect) is verified, not just the absence of incorrect behavior (invocation)."
+      },
+      {
+        "reason": "Neither assertion verifies that Claude did not manually write SESSION_LOG.md as a workaround. A model that bypasses the skill but directly writes the file would pass both current assertions. The transcript confirms no file was created, but no assertion catches this failure mode."
+      }
+    ],
+    "overall": "Both assertions pass with strong evidence, but they are near-duplicates testing only absence of invocation. The eval would be more discriminating with assertions that verify the presence of correct redirect behavior and absence of manual workaround file creation."
+  }
+}

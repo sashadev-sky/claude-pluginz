@@ -1,0 +1,20 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "The transcript's Behavior Analysis section explicitly states 'Skill tool invoked: No'. The assistant responded with a single directing sentence rather than invoking the skill."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "No Skill tool call block appears anywhere in the transcript. The assistant only produced a prose response instructing the user to invoke '/project-continuity:log-session-summary' themselves."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  }
+}

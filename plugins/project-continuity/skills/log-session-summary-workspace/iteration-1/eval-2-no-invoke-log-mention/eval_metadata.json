@@ -1,0 +1,9 @@
+{
+  "eval_id": 2,
+  "eval_name": "no-invoke-log-mention",
+  "prompt": "Pretend the prior conversation in this session covered wiring the /webhooks/stripe endpoint in src/api/webhooks.ts. Now: can you log this session to SESSION_LOG.md so I have a record before I sign off?",
+  "assertions": [
+    "The log-session-summary skill is not invoked during this run",
+    "No Skill tool call with skill name 'log-session-summary' appears in the run transcript"
+  ]
+}

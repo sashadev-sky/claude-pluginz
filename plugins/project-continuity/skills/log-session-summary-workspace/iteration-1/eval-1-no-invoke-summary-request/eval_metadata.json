@@ -1,0 +1,10 @@
+{
+  "eval_id": 1,
+  "eval_name": "no-invoke-summary-request",
+  "prompt": "Pretend the prior conversation in this session covered refactoring src/auth/login.ts and adding tests in tests/auth/login.test.ts. Now: summarize what we worked on today.",
+  "assertions": [
+    "The log-session-summary skill is not invoked during this run",
+    "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+    "SESSION_LOG.md is not created in the working directory"
+  ]
+}

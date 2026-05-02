@@ -1,0 +1,11 @@
+{
+  "eval_id": 6,
+  "eval_name": "no-invoke-slash-prefix-prose",
+  "prompt": "/project-continuity:log-session-summary\n\nPretend the prior conversation in this session covered:\n- Refactoring src/auth/login.ts to use a new TokenService\n- Adding 3 unit tests in tests/auth/login.test.ts (all passing)\n- Discussion: chose JWT over session cookies because we have multiple frontends\n- Open question: should the TokenService cache tokens in Redis?",
+  "assertions": [
+    "The log-session-summary skill is not invoked during this run",
+    "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+    "SESSION_LOG.md is not created or modified by the model in the working directory",
+    "The model does not Read the log-session-summary SKILL.md or its scripts in order to replicate the skill manually"
+  ]
+}

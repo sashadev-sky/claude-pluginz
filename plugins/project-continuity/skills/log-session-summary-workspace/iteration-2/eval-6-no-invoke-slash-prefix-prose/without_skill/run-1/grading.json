@@ -1,0 +1,74 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "metrics.json shows 'skill_invocations': 0 and 'Skill': 0 in tool_calls. The transcript explicitly states 'NONE — the `project-continuity:log-session-summary` skill was not available. No Skill tool was invoked.' The simulated Claude response confirms it could not invoke the slash command because the plugin was not available."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The transcript section 'Skill Tool Calls' reads 'NONE' explicitly. The metrics.json confirms 'Skill': 0 tool calls. There is no Skill tool call of any kind in the transcript, let alone one for 'log-session-summary'."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 0,
+      "Write": 1,
+      "Bash": 0,
+      "Skill": 0
+    },
+    "total_tool_calls": 1,
+    "total_steps": 2,
+    "errors_encountered": 0,
+    "output_chars": 1280,
+    "transcript_chars": 1675
+  },
+  "timing": {
+    "total_tokens": 12229,
+    "executor_duration_ms": 41153,
+    "total_duration_seconds": 41.2
+  },
+  "claims": [
+    {
+      "claim": "Claude recognized the '/project-continuity:log-session-summary' text as a slash command reference but could not invoke it (no skill available)",
+      "type": "process",
+      "verified": true,
+      "evidence": "The simulated Claude response in the transcript explicitly acknowledges 'I see you're referencing `/project-continuity:log-session-summary`, but I don't have the `project-continuity` plugin or that skill available in this session.'"
+    },
+    {
+      "claim": "Claude manually wrote a SESSION_LOG.md as a substitute for the skill",
+      "type": "process",
+      "verified": true,
+      "evidence": "metrics.json shows 'files_created': ['SESSION_LOG.md'] and a Write tool call. The file exists in outputs/ at 1280 chars."
+    },
+    {
+      "claim": "No errors were encountered",
+      "type": "quality",
+      "verified": true,
+      "evidence": "metrics.json shows 'errors_encountered': 0."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "Both assertions test the same thing from slightly different angles (skill not invoked vs. no Skill tool call). They are functionally redundant — either both pass or both fail together. Consider replacing one with an assertion that checks the complementary behavior: e.g., 'Claude still produces output despite the skill being unavailable' or 'Claude correctly explains why it cannot invoke the skill'. This would give the eval more discriminating power across failure modes."
+      },
+      {
+        "reason": "The 'without_skill' condition is a baseline scenario, so these assertions are trivially satisfied by construction — the skill cannot be invoked if it is not loaded. An eval asserting absence of behavior in a condition where that behavior is architecturally impossible provides weak signal. The more interesting eval question is whether Claude degrades gracefully (explains the gap, offers a manual alternative), which is currently unchecked."
+      }
+    ],
+    "overall": "Assertions pass correctly, but both test absence of the same mechanism under a condition where it is structurally impossible. Consider adding assertions about graceful degradation behavior."
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "tool_calls": {"Read": 0, "Write": 0, "Bash": 0, "Skill": 0},
+  "total_tool_calls": 0,
+  "total_steps": 1,
+  "files_created": [],
+  "skill_invocations": 0,
+  "errors_encountered": 0,
+  "output_chars": 237,
+  "transcript_chars": 3800,
+  "total_tokens": 1420,
+  "duration_ms": 610
+}

@@ -1,0 +1,81 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is invoked during this run",
+      "passed": true,
+      "evidence": "Transcript states 'INVOKED — host parsed the prompt as a slash command and directly loaded the skill instructions'. metrics.json confirms skill_invocations: 1. The skill was triggered via the slash command host path rather than the Skill tool (tool_calls.Skill is 0), but invocation did occur."
+    },
+    {
+      "text": "SESSION_LOG.md exists at the working directory root after the run",
+      "passed": true,
+      "evidence": "SESSION_LOG.md is present in the outputs directory. metrics.json confirms files_created: ['SESSION_LOG.md']. The file contains a session summary with date 2026-05-01."
+    },
+    {
+      "text": "SESSION_LOG.md contains all five required sections (Date/time, Tasks completed, Files modified, Decisions made, Open questions) -- empty sections may be marked 'None' but must be present",
+      "passed": true,
+      "evidence": "Read SESSION_LOG.md directly. All five sections present: '- **Date/time**: 2026-05-01T00:00:00', '- **Tasks completed**: None', '- **Files modified**: None', '- **Decisions made**: None', '- **Open questions**: None'. All sections accounted for, empty ones correctly marked 'None'."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 1,
+      "Write": 2,
+      "Bash": 1,
+      "Skill": 0
+    },
+    "total_tool_calls": 4,
+    "total_steps": 4,
+    "skill_invocations": 1,
+    "errors_encountered": 0,
+    "output_chars": 181,
+    "transcript_chars": 1149
+  },
+  "timing": {
+    "total_duration_seconds": 27.8,
+    "total_tokens": 12211,
+    "duration_ms": 27777
+  },
+  "claims": [
+    {
+      "claim": "Skill was invoked via slash command (host path), not via the Skill tool (model path)",
+      "type": "process",
+      "verified": true,
+      "evidence": "metrics.json shows tool_calls.Skill: 0 and skill_invocations: 1, consistent with host-path slash command invocation"
+    },
+    {
+      "claim": "All five sections are present in SESSION_LOG.md even though there is no session history",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Confirmed by direct read of SESSION_LOG.md: all five fields present, each marked 'None'"
+    },
+    {
+      "claim": "No prior conversation context was available, so all sections are marked 'None'",
+      "type": "factual",
+      "verified": true,
+      "evidence": "SESSION_LOG.md shows every section value is 'None', which is consistent with no session history being available"
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "The log-session-summary skill is invoked during this run",
+        "reason": "Assertion 1 is satisfied by host-path slash command invocation (skill_invocations: 1) but would fail if checked only via tool_calls.Skill (which is 0). The assertion is correctly phrased to pass in both invocation modes, but a future eval might want to distinguish between the two paths to ensure the model-path (Skill tool) also works correctly."
+      },
+      {
+        "reason": "No assertion checks the format or structure of SESSION_LOG.md beyond section presence — e.g., that the date is a valid ISO timestamp, or that the file uses the expected markdown heading/bullet structure. A malformed file with the right keywords would still pass all three assertions."
+      }
+    ],
+    "overall": "All three assertions pass cleanly with direct evidence. The evals cover the core requirements well. The main gap is format validation: SESSION_LOG.md content is only checked for section presence, not structural correctness or date validity."
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "Transcript 'Skill Tool Calls' section states 'NONE. The log-session-summary skill was NOT invoked.' metrics.json confirms skill_invocations: 0 and Skill tool call count: 0."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The transcript contains zero Skill tool calls of any kind. The 'Skill Tool Calls' section explicitly reads 'NONE.' metrics.json records total_tool_calls: 0 with Skill: 0."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 0,
+      "Write": 0,
+      "Bash": 0,
+      "Skill": 0
+    },
+    "total_tool_calls": 0,
+    "total_steps": 1,
+    "errors_encountered": 0,
+    "output_chars": 1461,
+    "transcript_chars": 2940
+  },
+  "timing": {
+    "total_tokens": 12551,
+    "executor_duration_seconds": 40.2,
+    "total_duration_seconds": 40.2
+  },
+  "claims": [
+    {
+      "claim": "Claude correctly identified 'write a session log' as a natural language request, not the slash command trigger",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Transcript Notes section: 'Claude correctly identified that \"write a session log\" is a natural language request, not the slash command trigger.' Claude's simulated response explicitly redirected the user to /project-continuity:log-session-summary."
+    },
+    {
+      "claim": "SESSION_LOG.md was not written or modified",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Transcript 'Files Created' section reads 'NONE. SESSION_LOG.md was not written or modified.' metrics.json shows files_created: [] and Write: 0."
+    },
+    {
+      "claim": "The PreToolUse hook was not exercised because the model never attempted a Skill tool call",
+      "type": "process",
+      "verified": true,
+      "evidence": "metrics.json confirms Skill: 0 and total_tool_calls: 0. No hook invocation was needed since no Skill call was attempted."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "Both assertions check the same underlying fact (skill not invoked) from two slightly different angles. They are not independent — if one passes, the other necessarily passes. Consider replacing one with an assertion that checks a meaningfully different outcome, such as whether Claude redirected the user to the correct slash command rather than silently ignoring the request, or whether SESSION_LOG.md was not created/modified."
+      },
+      {
+        "reason": "No assertion covers Claude's response quality: specifically, whether it correctly explained why the natural language request doesn't trigger the skill and offered the right slash command. A skill that suppresses invocation but gives a misleading or empty response would pass both current assertions."
+      }
+    ],
+    "overall": "Both assertions pass convincingly and are backed by metrics. However, they are redundant — one checks behavior, the other checks the transcript for the same behavior. The eval would be stronger with one non-invocation check plus one assertion on response quality (redirect offered, no file written)."
+  }
+}

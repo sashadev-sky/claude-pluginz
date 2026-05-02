@@ -1,0 +1,79 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "metrics.json shows skill_invocations: 0 and Skill tool_calls: 0. Transcript confirms: 'Skill Tool Calls: NONE.' and 'Zero tool calls were made. This is a pure in-context conversational response.'"
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "Transcript section 'Skill Tool Calls' explicitly states 'NONE.' No Skill tool call of any kind appears in the transcript. metrics.json confirms total_tool_calls: 0 and Skill: 0."
+    },
+    {
+      "text": "SESSION_LOG.md is not created in the working directory",
+      "passed": true,
+      "evidence": "metrics.json shows files_created: []. Transcript states 'Files Created: NONE.' A filesystem search of the eval directory found no SESSION_LOG.md file."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 0,
+      "Write": 0,
+      "Bash": 0,
+      "Skill": 0
+    },
+    "total_tool_calls": 0,
+    "total_steps": 1,
+    "errors_encountered": 0,
+    "output_chars": 796,
+    "transcript_chars": 3003
+  },
+  "timing": {
+    "total_duration_seconds": 48.1,
+    "total_tokens": 13290,
+    "duration_ms": 48126
+  },
+  "claims": [
+    {
+      "claim": "The model correctly recognized no trigger condition was met and withheld the Skill tool call",
+      "type": "process",
+      "verified": true,
+      "evidence": "metrics.json confirms Skill: 0 and total_tool_calls: 0. The prompt was a general conversational summary request, not a /project-continuity:log-session-summary slash command invocation."
+    },
+    {
+      "claim": "The PreToolUse hook was not triggered because the model self-regulated correctly",
+      "type": "process",
+      "verified": true,
+      "evidence": "No Skill tool calls appear in the transcript or metrics, so the hook had no opportunity to fire. This is consistent with the claim."
+    },
+    {
+      "claim": "The model provided a well-structured prose summary of the hypothetical session",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Transcript shows Claude's Response included structured sections covering both src/auth/login.ts refactoring and tests/auth/login.test.ts additions, with appropriate detail about the work."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "All three assertions test the same underlying negative condition (skill not invoked) through slightly different lenses. Assertions 1 and 2 are nearly redundant — if no Skill tool call appears in the transcript (assertion 2), it necessarily follows that the skill was not invoked (assertion 1). Consider replacing one with an assertion about response quality: e.g., 'The model responded with a prose summary rather than deferring or refusing the request', which would catch a regression where the model correctly avoids the skill but also fails to be helpful."
+      },
+      {
+        "reason": "No assertion verifies that the model's response actually addressed the hypothetical session content (auth refactoring and test additions). A skill that blocked invocation but returned an empty or off-topic response would pass all three assertions. Adding a content-relevance check would make the eval more discriminating."
+      }
+    ],
+    "overall": "Assertions robustly verify the negative behavior (no invocation, no file creation) but leave the positive outcome (helpful prose summary) unchecked. The eval would be strengthened by at least one assertion about response quality or content relevance."
+  }
+}

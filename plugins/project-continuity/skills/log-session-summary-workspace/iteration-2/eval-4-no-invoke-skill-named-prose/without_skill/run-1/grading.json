@@ -1,0 +1,76 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "metrics.json shows skill_invocations: 0, Skill tool call count: 0, total_tool_calls: 0. Transcript section 'Skill Tool Calls' explicitly states: 'NONE — the `project-continuity:log-session-summary` skill was not loaded; no Skill tool call was made.'"
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "Transcript tool call table shows Skill count of 0. The transcript body contains no Skill tool call entries. The 'Skill Tool Calls' section explicitly reads 'NONE'. metrics.json confirms skill_invocations: 0."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 0,
+      "Write": 0,
+      "Bash": 0,
+      "Skill": 0
+    },
+    "total_tool_calls": 0,
+    "total_steps": 1,
+    "errors_encountered": 0,
+    "output_chars": 824,
+    "transcript_chars": 2071
+  },
+  "timing": {
+    "total_duration_seconds": 40.3,
+    "executor_duration_ms": 40279
+  },
+  "claims": [
+    {
+      "claim": "Claude correctly recognized the user's intent to invoke the named skill",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Claude's response acknowledges '`log-session-summary` skill isn't currently loaded' and references the skill by name, showing it understood the request."
+    },
+    {
+      "claim": "Claude did NOT write SESSION_LOG.md unprompted",
+      "type": "process",
+      "verified": true,
+      "evidence": "metrics.json shows files_created: [], wrote_session_log: false, and Write tool call count: 0."
+    },
+    {
+      "claim": "Claude offered two fallback alternatives: writing to SESSION_LOG.md manually, and installing the plugin",
+      "type": "quality",
+      "verified": true,
+      "evidence": "metrics.json notes: offered_to_write_session_log: true, offered_plugin_install: true. Transcript response contains both offers explicitly."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "Both assertions are essentially checking the same thing (no Skill tool call for log-session-summary). They would both pass or fail together, so they provide no additional discriminating power over a single assertion. Consider collapsing into one, or replacing the second with a distinct assertion about fallback behavior — e.g., that Claude offered a graceful alternative rather than silently doing nothing."
+      },
+      {
+        "reason": "Neither assertion checks for the absence of unintended side effects: Claude could theoretically satisfy both assertions while still writing SESSION_LOG.md via a Write tool call (no skill invoked, but equivalent harm done). Consider adding an assertion like 'No SESSION_LOG.md file was written to disk' to guard against this."
+      },
+      {
+        "reason": "The transcript is simulated (no real tool calls were made; the 'Skill Tool Calls: NONE' section is pre-authored). For a negative-behavior eval like this, a simulated transcript is inherently weak — it can't distinguish between a model that genuinely withholds the skill invocation and one that never had the opportunity. Consider using a live execution harness that actually loads the skill and verifies it is not called."
+      }
+    ],
+    "overall": "Both assertions pass clearly, but the eval has structural weaknesses: the two assertions are redundant, a key side-effect (file writes) is unchecked, and the simulated transcript format limits the discriminating power of the test."
+  }
+}

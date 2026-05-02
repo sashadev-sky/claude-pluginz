@@ -1,0 +1,78 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "Transcript section '## Skill Tool Calls' is explicitly 'NONE'. metrics.json confirms: skill_invocations=0 and Skill tool call count=0."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The transcript contains zero Skill tool calls of any kind. The string 'log-session-summary' does not appear as a tool invocation anywhere in the transcript. metrics.json corroborates: Skill=0, total_tool_calls=0."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 0,
+      "Write": 0,
+      "Bash": 0,
+      "Skill": 0
+    },
+    "total_tool_calls": 0,
+    "total_steps": 1,
+    "errors_encountered": 0,
+    "output_chars": 642,
+    "transcript_chars": 1630
+  },
+  "timing": {
+    "executor_duration_seconds": null,
+    "total_duration_seconds": 29.8,
+    "total_tokens": 11094,
+    "duration_ms": 29843
+  },
+  "claims": [
+    {
+      "claim": "Claude responded directly in chat with a bullet-point list",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The simulated response in the transcript is a bullet-point list covering dependency bump, changelog review, test suite run, results, and next steps."
+    },
+    {
+      "claim": "No tools were called (no Read, Write, Bash, or Skill invocations)",
+      "type": "process",
+      "verified": true,
+      "evidence": "metrics.json shows all tool call counts as 0 and total_tool_calls=0."
+    },
+    {
+      "claim": "No files were created or modified",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Transcript states '## Files Created: NONE' and metrics.json shows files_created=[]."
+    },
+    {
+      "claim": "Without the skill, the recap is not persisted anywhere (no SESSION_LOG.md entry)",
+      "type": "quality",
+      "verified": true,
+      "evidence": "No files were created; transcript notes explicitly confirm no persistent artifact was produced."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "Both assertions are near-trivially satisfied in the no-skill baseline — there is no mechanism by which the skill could be invoked when it isn't present. These assertions are better suited as sanity checks on the with_skill condition (verifying the skill fires only when appropriate) rather than standalone evals for the without_skill baseline. Consider adding an assertion that validates the baseline actually produced an in-chat response (i.e., output_chars > 0 and a non-empty response was returned), or that the response quality is adequate but not persisted — the more discriminating question for this condition."
+      }
+    ],
+    "overall": "Both assertions pass with strong evidence, but they test the absence of something that was architecturally impossible anyway (skill not available). The meaningful outcome — that the baseline produces a useful but non-persistent response — is not covered by any assertion."
+  }
+}

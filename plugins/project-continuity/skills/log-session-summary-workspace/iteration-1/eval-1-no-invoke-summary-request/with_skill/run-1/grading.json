@@ -1,0 +1,51 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "metrics.json shows Skill tool calls = 0. Transcript states: 'NONE \u2014 The skill description explicitly states it should only be invoked via the /project-continuity:log-session-summary slash command.' Notes confirm Claude correctly withholds the Skill tool call."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The transcript's 'Skill tool calls' section reads 'NONE'. metrics.json confirms Skill: 0. No Skill tool call of any kind appears in the transcript."
+    },
+    {
+      "text": "SESSION_LOG.md is not created in the working directory",
+      "passed": true,
+      "evidence": "Transcript 'Files created' section reads 'NONE'. metrics.json shows files_created = []. The transcript explicitly states 'No files are created as part of this response.'"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 1,
+      "Write": 1,
+      "Bash": 2,
+      "Skill": 0
+    },
+    "total_tool_calls": 4,
+    "total_steps": 1,
+    "files_created": [],
+    "errors_encountered": 0,
+    "output_chars": 2289,
+    "transcript_chars": 2289
+  },
+  "timing": {
+    "executor_duration_seconds": 33.3,
+    "total_duration_seconds": 33.3
+  },
+  "claims": [],
+  "eval_feedback": {
+    "suggestions": [
+      "Consider adding an assertion that verifies Claude's response is still helpful (i.e., provides a prose summary) even when the skill is not invoked, to ensure withholding the skill doesn't result in a degraded user experience.",
+      "Could add a check that Claude mentions how to invoke the skill explicitly (the transcript does this, but it's not currently asserted)."
+    ],
+    "overall": "All 3 assertions pass cleanly. The model correctly identified that a conversational summary request does not trigger the log-session-summary skill, produced no file writes, and made zero Skill tool calls. The transcript also shows good behavior: Claude provided a helpful prose response and proactively told the user how to invoke the skill if desired."
+  }
+}

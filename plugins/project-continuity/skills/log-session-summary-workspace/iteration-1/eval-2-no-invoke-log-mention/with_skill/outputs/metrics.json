@@ -1,0 +1,17 @@
+{
+  "eval": "eval-2-no-invoke-log-mention",
+  "condition": "with_skill",
+  "date": "2026-05-01",
+  "skill": "log-session-summary",
+  "tool_calls": {
+    "total": 0,
+    "skill_invocations": 0,
+    "file_writes": 0,
+    "other": 0
+  },
+  "files_created": [],
+  "session_log_written": false,
+  "redirected_to_slash_command": true,
+  "pass": true,
+  "notes": "Claude received an explicit user request to write SESSION_LOG.md but correctly abstained from invoking the skill or writing any files. Response was a single redirect sentence pointing to /project-continuity:log-session-summary."
+}

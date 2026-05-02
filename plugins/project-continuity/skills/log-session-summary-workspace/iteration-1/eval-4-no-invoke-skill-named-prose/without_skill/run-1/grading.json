@@ -1,0 +1,20 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "The transcript explicitly states 'NONE \u2014 no skill loaded in this run' under 'Skill tool calls'. No Skill tool call of any kind appears in the transcript. The notes confirm: 'No Skill tool call was attempted \u2014 consistent with the without_skill condition.'"
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The transcript contains zero Skill tool calls. The 'Skill tool calls' section reads 'NONE \u2014 no skill loaded in this run'. Claude recognized the user's request but responded with a prose explanation that the skill was unavailable, offering a manual inline summary instead \u2014 no invocation of 'log-session-summary' or any other skill was made."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  }
+}

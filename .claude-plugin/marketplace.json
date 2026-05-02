@@ -17,7 +17,7 @@
     },
     {
       "name": "coding-journal",
-      "source": "./plugins/coding-journal",
+      "source": "./plugins/coding-journal/",
       "category": "productivity",
       "tags": [
         "skills"

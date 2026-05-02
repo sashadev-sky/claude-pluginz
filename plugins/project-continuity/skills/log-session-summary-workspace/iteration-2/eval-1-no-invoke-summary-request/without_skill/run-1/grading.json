@@ -1,0 +1,79 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "Transcript 'Skill Tool Calls' section states: 'NONE — no skill loaded. The log-session-summary skill was not available in this condition. No Skill tool invocation was attempted.' metrics.json confirms skill_invocations: 0 and Skill tool calls: 0."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "Transcript explicitly states no Skill tool call was made. metrics.json shows total_tool_calls: 0 and Skill: 0. No Skill invocation of any kind appears anywhere in the transcript."
+    },
+    {
+      "text": "SESSION_LOG.md is not created in the working directory",
+      "passed": true,
+      "evidence": "Transcript 'Files Created' section states: 'NONE — no SESSION_LOG.md or any other file was created. Claude responded entirely in chat without persisting anything to disk.' metrics.json files_created field is an empty array []."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 0,
+      "Write": 0,
+      "Bash": 0,
+      "Skill": 0
+    },
+    "total_tool_calls": 0,
+    "total_steps": 1,
+    "errors_encountered": 0,
+    "output_chars": 912,
+    "transcript_chars": 2178
+  },
+  "timing": {
+    "total_duration_seconds": 41.8,
+    "total_tokens": 12038,
+    "duration_ms": 41772
+  },
+  "claims": [
+    {
+      "claim": "Claude answered the summary request directly in chat with a well-structured prose response",
+      "type": "quality",
+      "verified": true,
+      "evidence": "The transcript shows a clear two-section response covering 'Refactoring src/auth/login.ts' and 'Adding tests in tests/auth/login.test.ts' with a concluding paragraph. Response was 912 characters."
+    },
+    {
+      "claim": "No tool calls of any kind were made (Read, Write, Bash, Skill — all zero)",
+      "type": "process",
+      "verified": true,
+      "evidence": "metrics.json confirms: tool_calls all zero, total_tool_calls: 0."
+    },
+    {
+      "claim": "This is the expected baseline behavior for the without_skill condition",
+      "type": "quality",
+      "verified": true,
+      "evidence": "The condition is explicitly 'without_skill', and the transcript notes this is the expected baseline: conversational summary without logging. All three negative assertions (no skill invocation, no file creation) hold."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "All three assertions test the same underlying outcome (skill not invoked / nothing logged) from slightly different angles. Assertions 1 and 2 are nearly redundant — one checks the Skill tool call log, the other checks the same via transcript wording. Consider collapsing to a single 'no Skill tool call made' assertion, or distinguish them more meaningfully (e.g., assertion 1 checks metrics.json skill_invocations == 0, assertion 2 checks transcript text)."
+      },
+      {
+        "reason": "No assertion checks whether Claude actually produced a substantive response. A run where the model refused to respond or produced an error would still pass all three assertions. Consider adding an assertion like 'Claude provides a coherent conversational summary in its reply' to ensure the baseline is genuinely functional."
+      }
+    ],
+    "overall": "The assertions correctly characterize the expected baseline (no skill, no file). However they are all negative/absence checks — they confirm nothing went wrong but do not confirm anything went right. Adding a positive assertion about response quality would make this eval more discriminating."
+  }
+}

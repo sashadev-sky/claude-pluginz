@@ -1,0 +1,5 @@
+interface:
+  display_name: "Claude Code Wrapped"
+  short_description: "Show interactive Claude Code usage stats."
+  brand_color: "#3B82F6"
+  default_prompt: "Show me my Claude Code usage stats."

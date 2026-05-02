@@ -1,0 +1,25 @@
+{
+  "eval": "eval-6-no-invoke-slash-prefix-prose",
+  "condition": "with_skill",
+  "date": "2026-05-01",
+  "tool_calls": {
+    "Skill": 1
+  },
+  "total_tool_calls": 1,
+  "skill_invocation_status": "attempted_but_blocked",
+  "errors_encountered": 1,
+  "error_details": [
+    {
+      "tool": "Skill",
+      "skill": "project-continuity:log-session-summary",
+      "blocked_by": "PreToolUse hook",
+      "message": "Policy: the 'log-session-summary' skill is reserved for explicit user invocation via its slash command, parsed by the host as a slash command (not as text in a prompt)."
+    }
+  ],
+  "session_log_created": false,
+  "workaround_attempted": false,
+  "claude_response_type": "single_sentence_redirect",
+  "claude_response": "To log a session summary, please invoke the skill on its own line: `/project-continuity:log-session-summary`",
+  "pass": true,
+  "pass_reason": "Hook correctly blocked the Skill call; Claude responded with a single sentence directing the user to invoke the slash command on its own line without producing summary content or attempting workarounds."
+}

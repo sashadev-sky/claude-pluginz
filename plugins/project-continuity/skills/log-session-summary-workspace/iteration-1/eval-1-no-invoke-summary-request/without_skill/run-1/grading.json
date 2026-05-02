@@ -1,0 +1,30 @@
+{
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_tokens": 11258,
+    "duration_ms": 30041,
+    "total_duration_seconds": 30.0
+  },
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "The transcript explicitly states 'NONE \u2014 no skill loaded in this run' under the Skill tool calls section. metrics.json confirms Skill tool call count is 0 and total_tool_calls is 0."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The transcript shows 'NONE \u2014 no skill loaded in this run' under Skill tool calls. metrics.json records 0 Skill tool calls. No invocation of 'log-session-summary' appears anywhere in the transcript."
+    },
+    {
+      "text": "SESSION_LOG.md is not created in the working directory",
+      "passed": true,
+      "evidence": "The transcript states 'NONE' under Files created, with the note 'no skill was available to invoke, so no SESSION_LOG.md was written.' metrics.json confirms files_created is an empty array []. A filesystem search found no SESSION_LOG.md under the eval directory."
+    }
+  ]
+}

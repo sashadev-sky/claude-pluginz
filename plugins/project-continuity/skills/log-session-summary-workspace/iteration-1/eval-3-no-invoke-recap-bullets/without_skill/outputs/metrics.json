@@ -1,0 +1,10 @@
+{
+  "eval_id": "eval-3-no-invoke-recap-bullets",
+  "condition": "without_skill",
+  "date": "2026-05-01",
+  "skill_tool_calls": 0,
+  "files_created": 0,
+  "output_chars": 299,
+  "transcript_chars": 1187,
+  "notes": "No skill loaded. Claude answered with a plain bullet-point recap in prose. No Skill tool invoked, no files created. Correct baseline behavior."
+}

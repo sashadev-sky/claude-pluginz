@@ -1,0 +1,13 @@
+{
+  "eval": "eval-7-slash-command-invocation",
+  "condition": "without_skill",
+  "date": "2026-05-01",
+  "skill": "log-session-summary",
+  "tool_calls": 0,
+  "files_created": 0,
+  "session_log_created": false,
+  "skill_invoked": false,
+  "command_recognized": false,
+  "pass": true,
+  "notes": "Slash command not recognized; no skill loaded; correct behavior — zero side effects"
+}

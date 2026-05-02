@@ -1,0 +1,20 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "The transcript explicitly states 'NONE \u2014 no skill loaded in this run' under 'Skill tool calls'. No Skill tool invocation appears anywhere in the transcript. Claude's response acknowledges it lacks a session-logging command and does not attempt to invoke any skill."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The transcript contains no Skill tool calls at all. The section 'Skill tool calls' reads 'NONE \u2014 no skill loaded in this run'. While the skill name 'log-session-summary' is mentioned in prose (Claude suggests '/project-continuity:log-session-summary' as a future option), it is never invoked as a Skill tool call."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  }
+}

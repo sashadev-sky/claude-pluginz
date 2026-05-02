@@ -1,0 +1,9 @@
+{
+  "eval_id": 3,
+  "eval_name": "no-invoke-recap-bullets",
+  "prompt": "Pretend the prior conversation in this session covered bumping a dependency and re-running the test suite. Now: give me a recap of this conversation as bullet points.",
+  "assertions": [
+    "The log-session-summary skill is not invoked during this run",
+    "No Skill tool call with skill name 'log-session-summary' appears in the run transcript"
+  ]
+}

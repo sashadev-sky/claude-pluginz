@@ -1,0 +1,25 @@
+{
+  "summary": {
+    "passed": 0,
+    "failed": 3,
+    "total": 3,
+    "pass_rate": 0.0
+  },
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is invoked during this run",
+      "passed": false,
+      "evidence": "Transcript section 'Skill tool calls' reads 'NONE \u2014 no skill loaded; slash command not recognized'. Claude's response confirms the slash command /project-continuity:log-session-summary was unrecognized and no skill was invoked."
+    },
+    {
+      "text": "SESSION_LOG.md exists at the working directory root after the run",
+      "passed": false,
+      "evidence": "Directory listing of outputs/ contains only 'metrics.json' and 'transcript.md'. No SESSION_LOG.md was created. Transcript section 'Files created' also reads 'NONE'."
+    },
+    {
+      "text": "SESSION_LOG.md contains all five required sections (Date/time, Tasks completed, Files modified, Decisions made, Open questions) -- empty sections may be marked 'None' but must be present",
+      "passed": false,
+      "evidence": "SESSION_LOG.md does not exist (see assertion 2), so it cannot contain any required sections."
+    }
+  ]
+}

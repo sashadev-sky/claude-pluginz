@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is invoked during this run",
+      "passed": true,
+      "evidence": "The transcript explicitly states 'INVOKED \u2014 host parsed the prompt as a slash command and directly loaded the skill instructions' under the '## Skill invocation' section. The transcript notes confirm the slash command format '/project-continuity:log-session-summary' was correctly parsed by the host."
+    },
+    {
+      "text": "SESSION_LOG.md exists at the working directory root after the run",
+      "passed": true,
+      "evidence": "SESSION_LOG.md is present in the outputs directory alongside transcript.md and metrics.json. The transcript also lists it under '## Files created': 'SESSION_LOG.md \u2014 appended one session entry to the working directory root'."
+    },
+    {
+      "text": "SESSION_LOG.md contains all five required sections (Date/time, Tasks completed, Files modified, Decisions made, Open questions) -- empty sections may be marked 'None' but must be present",
+      "passed": true,
+      "evidence": "SESSION_LOG.md contains all five required sections: '**Date/time**: 2026-05-01T00:00:00Z', '**Tasks completed**: None...', '**Files modified**: None...', '**Decisions made**: None...', '**Open questions**: None...'. Empty sections are explicitly marked 'None' rather than omitted."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

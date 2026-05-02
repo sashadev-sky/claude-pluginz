@@ -19,12 +19,31 @@ set -euo pipefail
 target_skill="${1:?skill name required}"
 
 input="$(cat)"
+session_id="$(printf '%s' "$input" | jq -r '.session_id // empty')"
 tool_name="$(printf '%s' "$input" | jq -r '.tool_name // empty')"
 skill="$(printf '%s' "$input" | jq -r '.tool_input.skill // empty')"
 
 skill="${skill##*:}"
 
 if [ "$tool_name" = "Skill" ] && [ "$skill" = "$target_skill" ]; then
+  if [ -n "$session_id" ]; then
+    safe_session="${session_id//[^A-Za-z0-9_.-]/_}"
+    sentinel_dir="${TMPDIR:-/tmp}/project-continuity-hooks"
+    sentinel="${sentinel_dir}/${safe_session}.allow-log-session-summary"
+    if [ -f "$sentinel" ]; then
+      rm -f "$sentinel"
+      jq -nc \
+        '{
+          hookSpecificOutput: {
+            hookEventName: "PreToolUse",
+            permissionDecision: "allow",
+            permissionDecisionReason: "Allowed one log-session-summary invocation requested by the exact bare $project-continuity prompt."
+          }
+        }'
+      exit 0
+    fi
+  fi
+
   jq -nc \
     --arg skill "$target_skill" \
     '{

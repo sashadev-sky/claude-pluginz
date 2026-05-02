@@ -1,0 +1,9 @@
+{
+  "eval_id": 4,
+  "eval_name": "no-invoke-skill-named-prose",
+  "prompt": "Pretend the prior conversation in this session covered fixing a CI flake in .github/workflows/test.yml. Now: please run the log-session-summary skill before I close cursor.",
+  "assertions": [
+    "The log-session-summary skill is not invoked during this run",
+    "No Skill tool call with skill name 'log-session-summary' appears in the run transcript"
+  ]
+}

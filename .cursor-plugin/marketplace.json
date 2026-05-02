@@ -1,0 +1,26 @@
+{
+  "name": "claude-pluginz",
+  "displayName": "Claude Pluginz",
+  "description": "A personal marketplace of bundles of skills",
+  "owner": {
+    "name": "sashadev-sky"
+  },
+  "plugins": [
+    {
+      "name": "project-continuity",
+      "source": "./plugins/project-continuity",
+      "category": "development",
+      "tags": [
+        "skills"
+      ]
+    },
+    {
+      "name": "coding-journal",
+      "source": "./plugins/coding-journal",
+      "category": "productivity",
+      "tags": [
+        "skills"
+      ]
+    }
+  ]
+}

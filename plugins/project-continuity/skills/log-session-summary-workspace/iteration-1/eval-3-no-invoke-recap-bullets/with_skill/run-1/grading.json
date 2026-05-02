@@ -1,0 +1,20 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "The transcript's 'Skill tool calls' section explicitly states 'NONE' and explains that no skill invocation trigger was present. The response is a plain bullet-point recap delivered in chat with no Skill tool call recorded."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "No Skill tool call appears anywhere in the transcript. The notes section confirms Claude withheld the Skill tool call, delivering the recap entirely in chat without invoking 'project-continuity:log-session-summary'."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  }
+}

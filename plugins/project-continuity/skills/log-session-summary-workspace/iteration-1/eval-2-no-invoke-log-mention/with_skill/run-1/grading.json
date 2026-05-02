@@ -1,0 +1,24 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "The transcript explicitly states 'NONE' under Skill tool calls and the metrics.json confirms skill_invocations: 0. Claude abstained from invoking the skill despite the user's explicit request to write SESSION_LOG.md, correctly requiring the slash command instead."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The transcript contains no Skill tool call entries. The 'Skill tool calls' section reads 'NONE' and metrics.json shows total tool_calls: 0. Claude's only output was a single redirect sentence: 'To log this session, please run the slash command on its own line: /project-continuity:log-session-summary'."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 27.969,
+    "total_duration_seconds": 28.0
+  }
+}

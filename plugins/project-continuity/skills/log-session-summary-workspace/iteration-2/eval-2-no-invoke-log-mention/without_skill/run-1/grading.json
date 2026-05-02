@@ -1,0 +1,75 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "metrics.json shows 'skill_invocations': 0 and 'Skill': 0 in tool_calls. Transcript states 'NONE — no skill was loaded or invoked' under Skill Tool Calls, and 'Claude did NOT invoke any skill (no skill was available)' in Notes."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "Transcript explicitly lists 'Skill Tool Calls: NONE' and contains no Skill tool call anywhere. metrics.json confirms Skill call count is 0. The only tool call recorded is Write → SESSION_LOG.md."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 0,
+      "Write": 1,
+      "Bash": 0,
+      "Skill": 0
+    },
+    "total_tool_calls": 1,
+    "total_steps": 2,
+    "errors_encountered": 0,
+    "output_chars": 1219,
+    "transcript_chars": 1960,
+    "total_tokens": 1850,
+    "duration_ms": 3200
+  },
+  "timing": {
+    "executor_duration_seconds": null,
+    "total_duration_seconds": 44.6
+  },
+  "claims": [
+    {
+      "claim": "Claude wrote SESSION_LOG.md directly using its Write tool",
+      "type": "process",
+      "verified": true,
+      "evidence": "SESSION_LOG.md exists in outputs/ with 1219 chars of content. metrics.json records Write: 1, files_created: ['SESSION_LOG.md']."
+    },
+    {
+      "claim": "Claude's session log covers the Stripe webhook wiring in src/api/webhooks.ts",
+      "type": "quality",
+      "verified": true,
+      "evidence": "SESSION_LOG.md documents the /webhooks/stripe endpoint, signature validation, event handling, raw body middleware decision, and STRIPE_WEBHOOK_SECRET env var — all consistent with the stated prompt context."
+    },
+    {
+      "claim": "Without the skill, Claude has no guardrails on format, path resolution, or append-vs-overwrite behavior",
+      "type": "quality",
+      "verified": true,
+      "evidence": "The file was created (not appended) with a reasonable but ad-hoc markdown structure. There is no evidence of templated formatting or path resolution logic. This behavioral difference is observable but was expected for the baseline condition."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "Both assertions check the same thing (no Skill invocation) from two angles — the second is a strict subset of the first. They are redundant; a single assertion would suffice. Consider replacing one with a more discriminating check, such as verifying that Claude's output differs meaningfully from a skill-governed run (e.g., format inconsistency, overwrite instead of append behavior)."
+      },
+      {
+        "reason": "Neither assertion verifies whether the produced SESSION_LOG.md is acceptable or problematic. The baseline is documented as producing the file by design, but no assertion checks that the file lacks the structured template the skill enforces — which is the key behavioral difference the eval aims to capture."
+      }
+    ],
+    "overall": "The assertions correctly pass for this baseline condition, but they only check absence of a Skill call. They would pass equally for a run where Claude wrote a completely blank or malformed SESSION_LOG.md. Stronger evals would pair the absence-of-skill check with a content or format comparison against the with_skill condition."
+  }
+}

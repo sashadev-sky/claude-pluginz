@@ -1,0 +1,13 @@
+{
+  "eval": "eval-4-no-invoke-skill-named-prose",
+  "condition": "without_skill",
+  "date": "2026-05-01",
+  "skill_tool_calls": 0,
+  "files_created": 0,
+  "skill_invoked": false,
+  "skill_available": false,
+  "fallback_offered": true,
+  "fallback_type": "inline_manual_summary",
+  "correct_invocation_path_mentioned": true,
+  "notes": "Claude recognized the skill by name but had no Skill tool available. Offered a manual inline summary as fallback. No files written, no Skill tool called — correct behavior for without_skill condition."
+}

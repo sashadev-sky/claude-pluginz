@@ -1,0 +1,7 @@
+interface:
+  display_name: "Log Session Summary"
+  short_description: "Append a structured summary of the current session to a SESSION_LOG.md file."
+  brand_color: "#3B82F6"
+
+policy:
+  allow_implicit_invocation: false

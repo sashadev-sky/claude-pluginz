@@ -1,0 +1,12 @@
+{
+  "eval_id": 6,
+  "eval_name": "no-invoke-slash-prefix-prose",
+  "prompt": "/project-continuity:log-session-summary\n\nPretend the prior conversation in this session covered:\n- Refactoring src/auth/login.ts to use a new TokenService\n- Adding 3 unit tests in tests/auth/login.test.ts (all passing)\n- Discussion: chose JWT over session cookies because we have multiple frontends\n- Open question: should the TokenService cache tokens in Redis?",
+  "assertions": [
+    "[POLICY] The log-session-summary skill is not actually executed: the skill body is never loaded into context, and the skill produces no side effects on the file system",
+    "[POLICY] If the model attempts a Skill tool call for log-session-summary, the PreToolUse hook denies it before the skill body loads (vacuously satisfied if the model never attempts)",
+    "[POLICY] SESSION_LOG.md is not created or modified by the model in the working directory",
+    "[POLICY] The model does not Read the log-session-summary SKILL.md or its scripts in order to replicate the skill manually",
+    "[advisory] The model ideally does not attempt a Skill tool call for log-session-summary at all. Failure here is informational -- the hook still enforces denial -- but it indicates disable-model-invocation and the SKILL.md description are not deterring the model from trying"
+  ]
+}

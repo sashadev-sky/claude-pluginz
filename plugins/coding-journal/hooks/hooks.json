@@ -1,0 +1,15 @@
+{
+  "description": "Block the bare $coding-journal plugin invocation and direct users to the concrete claude-code-wrapped skill.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 hooks/block-bare-invocation.py"
+          }
+        ]
+      }
+    ]
+  }
+}

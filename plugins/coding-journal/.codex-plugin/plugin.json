@@ -1,0 +1,14 @@
+{
+  "name": "coding-journal",
+  "description": "A plugin bundle for coding activity journals and usage retrospectives.",
+  "version": "1.20.9",
+  "hooks": "./hooks/hooks.json",
+  "interface": {
+    "displayName": "Coding Journal",
+    "shortDescription": "Coding activity review tools.",
+    "longDescription": "A plugin bundle for reviewing Claude Code usage, project activity, and coding history.",
+    "developerName": "sashadev-sky",
+    "category": "Productivity",
+    "capabilities": ["Read", "Run Commands"]
+  }
+}

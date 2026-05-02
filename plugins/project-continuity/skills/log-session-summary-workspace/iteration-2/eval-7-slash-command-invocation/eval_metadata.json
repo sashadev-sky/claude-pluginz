@@ -1,0 +1,10 @@
+{
+  "eval_id": 7,
+  "eval_name": "slash-command-invocation",
+  "prompt": "/project-continuity:log-session-summary",
+  "assertions": [
+    "The log-session-summary skill is invoked during this run",
+    "SESSION_LOG.md exists at the working directory root after the run",
+    "SESSION_LOG.md contains all five required sections (Date/time, Tasks completed, Files modified, Decisions made, Open questions) -- empty sections may be marked 'None' but must be present"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "claude-pluginz",
+  "interface": {
+    "displayName": "Claude Pluginz"
+  },
+  "owner": {
+    "name": "sashadev-sky"
+  },
+  "plugins": [
+    {
+      "name": "project-continuity",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "source": { "source": "local", "path": "./plugins/project-continuity" },
+      "category": "development"
+    },
+    {
+      "name": "coding-journal",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "source": { "source": "local", "path": "./plugins/coding-journal" },
+      "category": "productivity"
+    }
+  ]
+}

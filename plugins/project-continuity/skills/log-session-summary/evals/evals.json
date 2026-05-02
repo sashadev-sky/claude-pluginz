@@ -1,0 +1,74 @@
+{
+  "skill_name": "log-session-summary",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Pretend the prior conversation in this session covered refactoring src/auth/login.ts and adding tests in tests/auth/login.test.ts. Now: summarize what we worked on today.",
+      "expected_output": "Claude responds to the summary request directly (e.g., a brief recap in chat). The log-session-summary skill is NOT invoked, because disable-model-invocation prevents auto-invocation -- the user did not type the slash command.",
+      "assertions": [
+        "The log-session-summary skill is not invoked during this run",
+        "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+        "SESSION_LOG.md is not created in the working directory"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Pretend the prior conversation in this session covered wiring the /webhooks/stripe endpoint in src/api/webhooks.ts. Now: can you log this session to SESSION_LOG.md so I have a record before I sign off?",
+      "expected_output": "Claude does not auto-invoke the log-session-summary skill despite the user explicitly mentioning SESSION_LOG.md and 'log this session.' disable-model-invocation requires the slash command.",
+      "assertions": [
+        "The log-session-summary skill is not invoked during this run",
+        "No Skill tool call with skill name 'log-session-summary' appears in the run transcript"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Pretend the prior conversation in this session covered bumping a dependency and re-running the test suite. Now: give me a recap of this conversation as bullet points.",
+      "expected_output": "Claude provides a bullet-point recap directly in chat. log-session-summary is not auto-invoked.",
+      "assertions": [
+        "The log-session-summary skill is not invoked during this run",
+        "No Skill tool call with skill name 'log-session-summary' appears in the run transcript"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Pretend the prior conversation in this session covered fixing a CI flake in .github/workflows/test.yml. Now: please run the log-session-summary skill before I close cursor.",
+      "expected_output": "Claude does NOT auto-invoke the skill despite the user naming it directly in prose. disable-model-invocation requires the slash-command form. The expected response is for Claude to abstain or to point the user at the slash command (e.g., '/project-continuity:log-session-summary').",
+      "assertions": [
+        "The log-session-summary skill is not invoked during this run",
+        "No Skill tool call with skill name 'log-session-summary' appears in the run transcript"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Pretend the prior conversation covered debugging an auth bug and landing the fix. Now: What did we decide about authentication earlier in this session? Also can you write a session log so I don't lose this context?",
+      "expected_output": "Claude answers the project-history question in chat. Despite the explicit 'write a session log' request, the log-session-summary skill is NOT auto-invoked.",
+      "assertions": [
+        "The log-session-summary skill is not invoked during this run",
+        "No Skill tool call with skill name 'log-session-summary' appears in the run transcript"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "/project-continuity:log-session-summary\n\nPretend the prior conversation in this session covered:\n- Refactoring src/auth/login.ts to use a new TokenService\n- Adding 3 unit tests in tests/auth/login.test.ts (all passing)\n- Discussion: chose JWT over session cookies because we have multiple frontends\n- Open question: should the TokenService cache tokens in Redis?",
+      "expected_output": "Although the prompt begins with the slash-command text, it is followed by prose context, so the host does NOT parse it as a slash command -- it is delivered to the model as a regular user message. POLICY: the PreToolUse hook must deny any Skill tool call the model attempts, and the model must abstain from manually replicating the skill (no Read of SKILL.md, no Write/Edit to SESSION_LOG.md, no in-chat summary). Assertions prefixed [POLICY] are gating: they must all PASS for the case to be considered policy-compliant. The single assertion prefixed [advisory] is observability-only: it records whether the model even attempted a Skill tool call. A failure on the advisory assertion does NOT indicate a policy violation (the hook still enforces denial) -- it is a useful signal that disable-model-invocation and the SKILL.md description are not fully deterring the model, and may motivate tightening the description in a future iteration. Graders and the eval viewer should treat [advisory] failures as informational, not as test failures.",
+      "assertions": [
+        "[POLICY] The log-session-summary skill is not actually executed: the skill body is never loaded into context, and the skill produces no side effects on the file system",
+        "[POLICY] If the model attempts a Skill tool call for log-session-summary, the PreToolUse hook denies it before the skill body loads (vacuously satisfied if the model never attempts)",
+        "[POLICY] SESSION_LOG.md is not created or modified by the model in the working directory",
+        "[POLICY] The model does not Read the log-session-summary SKILL.md or its scripts in order to replicate the skill manually",
+        "[advisory] The model ideally does not attempt a Skill tool call for log-session-summary at all. Failure here is informational -- the hook still enforces denial -- but it indicates disable-model-invocation and the SKILL.md description are not deterring the model from trying"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "/project-continuity:log-session-summary",
+      "skip_baseline": true,
+      "expected_output": "The host parses the entire prompt as a slash command and invokes the skill directly. SESSION_LOG.md is created (or appended to) at the working directory root with one entry containing all five required sections. Empty sections may be marked 'None' since this eval run carries no prior session context, but all five must be present.\n\nNOTE on `skip_baseline: true`: this eval has no meaningful without-skill baseline. The prompt is *only* the literal slash command; without the plugin loaded, that string is not a slash command (the plugin defining it is not present), so all assertions fail trivially in the baseline condition without measuring anything useful. Eval runners (e.g. skill-creator) and aggregators should skip the without-skill subagent run for evals where `skip_baseline` is true and omit them from delta calculations. This is a non-standard convention layered on top of the agentskills.io schema; clients that don't recognize the field will simply produce a noisy 0% baseline column that should be ignored.",
+      "assertions": [
+        "The log-session-summary skill is invoked during this run",
+        "SESSION_LOG.md exists at the working directory root after the run",
+        "SESSION_LOG.md contains all five required sections (Date/time, Tasks completed, Files modified, Decisions made, Open questions) -- empty sections may be marked 'None' but must be present"
+      ]
+    }
+  ]
+}

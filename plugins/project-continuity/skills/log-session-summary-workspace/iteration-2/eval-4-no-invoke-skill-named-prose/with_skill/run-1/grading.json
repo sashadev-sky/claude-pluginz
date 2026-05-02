@@ -1,0 +1,75 @@
+{
+  "expectations": [
+    {
+      "text": "The log-session-summary skill is not invoked during this run",
+      "passed": true,
+      "evidence": "Transcript section 'Skill Tool Calls' states 'NONE.' and metrics.json confirms skill_invocations=0 and Skill tool call count=0. No SESSION_LOG.md was created."
+    },
+    {
+      "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+      "passed": true,
+      "evidence": "The transcript contains zero Skill tool calls of any kind. metrics.json shows {\"Skill\": 0} and total_tool_calls=0. The transcript section 'Files Created' also confirms 'NONE.'"
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {
+      "Read": 0,
+      "Write": 0,
+      "Bash": 0,
+      "Skill": 0
+    },
+    "total_tool_calls": 0,
+    "total_steps": 1,
+    "errors_encountered": 0,
+    "output_chars": 237,
+    "transcript_chars": 3800
+  },
+  "timing": {
+    "executor_duration_seconds": 0.61,
+    "grader_duration_seconds": null,
+    "total_duration_seconds": 44.2
+  },
+  "claims": [
+    {
+      "claim": "The model abstained from invoking the Skill tool because the user used prose rather than the slash command",
+      "type": "process",
+      "verified": true,
+      "evidence": "Transcript explains the guard mechanism: 'Use ONLY when the user explicitly invokes the /project-continuity:log-session-summary command.' The user said 'run the log-session-summary skill' in plain prose, which the model correctly distinguished from a slash command invocation."
+    },
+    {
+      "claim": "The PreToolUse hook was never reached because the model did not attempt the Skill tool call",
+      "type": "process",
+      "verified": true,
+      "evidence": "metrics.json shows Skill=0 and total_tool_calls=0, confirming no tool call was attempted. The transcript's explanation is consistent with this."
+    },
+    {
+      "claim": "Claude redirected the user with instructions to type the slash command directly",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Transcript 'Claude's Response' section: 'To log the session summary, please run the slash command directly: /project-continuity:log-session-summary'"
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "The log-session-summary skill is not invoked during this run",
+        "reason": "Both assertions test the same thing (absence of a Skill tool call) from two slightly different angles. They are nearly redundant — both would pass or fail together. A more discriminating second assertion might check that Claude responded with a helpful redirect (pointing the user to the slash command) rather than silently refusing or hallucinating a session log in prose."
+      },
+      {
+        "reason": "Neither assertion checks the quality of the model's response. Claude could satisfy both assertions by producing an unhelpful or confusing reply. An assertion like 'Claude's response instructs the user to invoke the slash command /project-continuity:log-session-summary' would test that the failure mode is graceful and useful, not just silent."
+      }
+    ],
+    "overall": "The two assertions are functionally redundant — both reduce to checking that Skill call count for log-session-summary is zero. They pass with high confidence here. Consider adding a positive assertion on response quality (the redirect) to distinguish a correct, helpful abstention from a broken or confusing one."
+  }
+}

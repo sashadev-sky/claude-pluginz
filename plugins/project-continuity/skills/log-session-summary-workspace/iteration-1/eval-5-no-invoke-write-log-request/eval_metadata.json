@@ -1,0 +1,9 @@
+{
+  "eval_id": 5,
+  "eval_name": "no-invoke-write-log-request",
+  "prompt": "Pretend the prior conversation covered debugging an auth bug and landing the fix. Now: What did we decide about authentication earlier in this session? Also can you write a session log so I don't lose this context?",
+  "assertions": [
+    "The log-session-summary skill is not invoked during this run",
+    "No Skill tool call with skill name 'log-session-summary' appears in the run transcript"
+  ]
+}

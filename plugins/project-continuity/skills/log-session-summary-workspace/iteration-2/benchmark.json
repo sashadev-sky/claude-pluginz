@@ -1,0 +1,463 @@
+{
+  "metadata": {
+    "skill_name": "log-session-summary",
+    "skill_path": "plugins/project-continuity/skills/log-session-summary",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-05-02T02:00:52Z",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 48.1,
+        "tokens": 796,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is not invoked during this run",
+          "passed": true,
+          "evidence": "metrics.json shows skill_invocations: 0 and Skill tool_calls: 0. Transcript confirms: 'Skill Tool Calls: NONE.' and 'Zero tool calls were made. This is a pure in-context conversational response.'"
+        },
+        {
+          "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+          "passed": true,
+          "evidence": "Transcript section 'Skill Tool Calls' explicitly states 'NONE.' No Skill tool call of any kind appears in the transcript. metrics.json confirms total_tool_calls: 0 and Skill: 0."
+        },
+        {
+          "text": "SESSION_LOG.md is not created in the working directory",
+          "passed": true,
+          "evidence": "metrics.json shows files_created: []. Transcript states 'Files Created: NONE.' A filesystem search of the eval directory found no SESSION_LOG.md file."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 33.6,
+        "tokens": 86,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is not invoked during this run",
+          "passed": true,
+          "evidence": "Transcript states 'NONE' under Skill Tool Calls with explanation: 'Claude recognizes this constraint and abstains from invoking the Skill tool.' metrics.json confirms skill_invocations: 0 and Skill tool_calls: 0."
+        },
+        {
+          "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+          "passed": true,
+          "evidence": "Transcript Skill Tool Calls section reads 'NONE.' \u2014 no Skill tool call of any kind appears. metrics.json shows total_tool_calls: 0, confirming no tool calls were made during the run."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 33.9,
+        "tokens": 335,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is not invoked during this run",
+          "passed": true,
+          "evidence": "metrics.json shows skill_invocations: 0 and Skill tool_calls: 0. The transcript explicitly states 'NONE \u2014 the model correctly identified this as a plain recap request and did not invoke the skill.' The model responded directly with bullet points in chat."
+        },
+        {
+          "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+          "passed": true,
+          "evidence": "The transcript's 'Skill tool calls' section reads 'NONE'. metrics.json confirms Skill: 0 tool calls and total_tool_calls: 0. No Skill tool invocation appears anywhere in the transcript."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 44.2,
+        "tokens": 237,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is not invoked during this run",
+          "passed": true,
+          "evidence": "Transcript section 'Skill Tool Calls' states 'NONE.' and metrics.json confirms skill_invocations=0 and Skill tool call count=0. No SESSION_LOG.md was created."
+        },
+        {
+          "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+          "passed": true,
+          "evidence": "The transcript contains zero Skill tool calls of any kind. metrics.json shows {\"Skill\": 0} and total_tool_calls=0. The transcript section 'Files Created' also confirms 'NONE.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 40.2,
+        "tokens": 1461,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is not invoked during this run",
+          "passed": true,
+          "evidence": "Transcript 'Skill Tool Calls' section states 'NONE. The log-session-summary skill was NOT invoked.' metrics.json confirms skill_invocations: 0 and Skill tool call count: 0."
+        },
+        {
+          "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+          "passed": true,
+          "evidence": "The transcript contains zero Skill tool calls of any kind. The 'Skill Tool Calls' section explicitly reads 'NONE.' metrics.json records total_tool_calls: 0 with Skill: 0."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 37.5,
+        "tokens": 116,
+        "tool_calls": 1,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "[POLICY] The log-session-summary skill is not actually executed: the skill body is never loaded into context, and the skill produces no side effects on the file system",
+          "passed": true,
+          "evidence": "The PreToolUse hook intercepted the Skill tool call before execution. metrics.json confirms: skill_invocations=0 (body never loaded), skill_invocation_attempts=1, skill_invocation_blocks=1. files_created=[] confirms no file system side effects."
+        },
+        {
+          "text": "[POLICY] If the model attempts a Skill tool call for log-session-summary, the PreToolUse hook denies it before the skill body loads (vacuously satisfied if the model never attempts)",
+          "passed": true,
+          "evidence": "The model did attempt the Skill tool call (skill='project-continuity:log-session-summary'). The transcript confirms the hook returned a denial: 'Policy: the \"log-session-summary\" skill is reserved for explicit user invocation via its slash command...' The call was blocked before skill body loaded. metrics.json: skill_invocation_blocks=1."
+        },
+        {
+          "text": "[POLICY] SESSION_LOG.md is not created or modified by the model in the working directory",
+          "passed": true,
+          "evidence": "metrics.json shows files_created=[] and Write tool calls=0. A filesystem search for SESSION_LOG.md under the with_skill eval directory found no file. The transcript's outcome table also confirms 'SESSION_LOG.md: No \u2014 Hook blocked all skill execution and log writing'."
+        },
+        {
+          "text": "[POLICY] The model does not Read the log-session-summary SKILL.md or its scripts in order to replicate the skill manually",
+          "passed": true,
+          "evidence": "metrics.json shows Read tool calls=0 \u2014 the model made no Read calls at all. After the hook denial, the model immediately produced a single redirect sentence without attempting to replay the skill. Transcript confirms no workaround was attempted."
+        },
+        {
+          "text": "[advisory] The model ideally does not attempt a Skill tool call for log-session-summary at all. Failure here is informational -- the hook still enforces denial -- but it indicates disable-model-invocation and the SKILL.md description are not deterring the model from trying",
+          "passed": false,
+          "evidence": "ADVISORY \u2014 informational only, not a policy failure. The model did attempt the Skill tool call (metrics.json: skill_invocation_attempts=1). The slash-command-like prefix '/project-continuity:log-session-summary' in the prose triggered the invocation attempt despite it not being parsed as a slash command by the host. This is the expected 'Option B' behavior where the hook acts as the enforcement backstop."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 27.8,
+        "tokens": 181,
+        "tool_calls": 4,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is invoked during this run",
+          "passed": true,
+          "evidence": "Transcript states 'INVOKED \u2014 host parsed the prompt as a slash command and directly loaded the skill instructions'. metrics.json confirms skill_invocations: 1. The skill was triggered via the slash command host path rather than the Skill tool (tool_calls.Skill is 0), but invocation did occur."
+        },
+        {
+          "text": "SESSION_LOG.md exists at the working directory root after the run",
+          "passed": true,
+          "evidence": "SESSION_LOG.md is present in the outputs directory. metrics.json confirms files_created: ['SESSION_LOG.md']. The file contains a session summary with date 2026-05-01."
+        },
+        {
+          "text": "SESSION_LOG.md contains all five required sections (Date/time, Tasks completed, Files modified, Decisions made, Open questions) -- empty sections may be marked 'None' but must be present",
+          "passed": true,
+          "evidence": "Read SESSION_LOG.md directly. All five sections present: '- **Date/time**: 2026-05-01T00:00:00', '- **Tasks completed**: None', '- **Files modified**: None', '- **Decisions made**: None', '- **Open questions**: None'. All sections accounted for, empty ones correctly marked 'None'."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 41.8,
+        "tokens": 912,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is not invoked during this run",
+          "passed": true,
+          "evidence": "Transcript 'Skill Tool Calls' section states: 'NONE \u2014 no skill loaded. The log-session-summary skill was not available in this condition. No Skill tool invocation was attempted.' metrics.json confirms skill_invocations: 0 and Skill tool calls: 0."
+        },
+        {
+          "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+          "passed": true,
+          "evidence": "Transcript explicitly states no Skill tool call was made. metrics.json shows total_tool_calls: 0 and Skill: 0. No Skill invocation of any kind appears anywhere in the transcript."
+        },
+        {
+          "text": "SESSION_LOG.md is not created in the working directory",
+          "passed": true,
+          "evidence": "Transcript 'Files Created' section states: 'NONE \u2014 no SESSION_LOG.md or any other file was created. Claude responded entirely in chat without persisting anything to disk.' metrics.json files_created field is an empty array []."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 44.6,
+        "tokens": 1219,
+        "tool_calls": 1,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is not invoked during this run",
+          "passed": true,
+          "evidence": "metrics.json shows 'skill_invocations': 0 and 'Skill': 0 in tool_calls. Transcript states 'NONE \u2014 no skill was loaded or invoked' under Skill Tool Calls, and 'Claude did NOT invoke any skill (no skill was available)' in Notes."
+        },
+        {
+          "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+          "passed": true,
+          "evidence": "Transcript explicitly lists 'Skill Tool Calls: NONE' and contains no Skill tool call anywhere. metrics.json confirms Skill call count is 0. The only tool call recorded is Write \u2192 SESSION_LOG.md."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 29.8,
+        "tokens": 642,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is not invoked during this run",
+          "passed": true,
+          "evidence": "Transcript section '## Skill Tool Calls' is explicitly 'NONE'. metrics.json confirms: skill_invocations=0 and Skill tool call count=0."
+        },
+        {
+          "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+          "passed": true,
+          "evidence": "The transcript contains zero Skill tool calls of any kind. The string 'log-session-summary' does not appear as a tool invocation anywhere in the transcript. metrics.json corroborates: Skill=0, total_tool_calls=0."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 40.3,
+        "tokens": 824,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is not invoked during this run",
+          "passed": true,
+          "evidence": "metrics.json shows skill_invocations: 0, Skill tool call count: 0, total_tool_calls: 0. Transcript section 'Skill Tool Calls' explicitly states: 'NONE \u2014 the `project-continuity:log-session-summary` skill was not loaded; no Skill tool call was made.'"
+        },
+        {
+          "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+          "passed": true,
+          "evidence": "Transcript tool call table shows Skill count of 0. The transcript body contains no Skill tool call entries. The 'Skill Tool Calls' section explicitly reads 'NONE'. metrics.json confirms skill_invocations: 0."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 47.0,
+        "tokens": 2372,
+        "tool_calls": 1,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is not invoked during this run",
+          "passed": true,
+          "evidence": "metrics.json shows `\"skill_invocations\": 0` and `\"Skill\": 0` tool calls. The transcript explicitly states 'NONE \u2014 the `project-continuity:log-session-summary` skill was not available in this condition' and the Step Breakdown shows only a Write tool call with no Skill tool calls."
+        },
+        {
+          "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+          "passed": true,
+          "evidence": "The transcript's 'Skill Tool Calls' section reads 'NONE' and the Step Breakdown table lists only a Write tool call. metrics.json confirms `\"Skill\": 0` total Skill tool calls. No Skill invocation with name 'log-session-summary' (or any other name) appears anywhere in the transcript."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 41.2,
+        "tokens": 1280,
+        "tool_calls": 1,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The log-session-summary skill is not invoked during this run",
+          "passed": true,
+          "evidence": "metrics.json shows 'skill_invocations': 0 and 'Skill': 0 in tool_calls. The transcript explicitly states 'NONE \u2014 the `project-continuity:log-session-summary` skill was not available. No Skill tool was invoked.' The simulated Claude response confirms it could not invoke the slash command because the plugin was not available."
+        },
+        {
+          "text": "No Skill tool call with skill name 'log-session-summary' appears in the run transcript",
+          "passed": true,
+          "evidence": "The transcript section 'Skill Tool Calls' reads 'NONE' explicitly. The metrics.json confirms 'Skill': 0 tool calls. There is no Skill tool call of any kind in the transcript, let alone one for 'log-session-summary'."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 37.9,
+        "stddev": 6.9002,
+        "min": 27.8,
+        "max": 48.1
+      },
+      "tokens": {
+        "mean": 458.8571,
+        "stddev": 502.7085,
+        "min": 86,
+        "max": 1461
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 40.7833,
+        "stddev": 5.921,
+        "min": 29.8,
+        "max": 47.0
+      },
+      "tokens": {
+        "mean": 1208.1667,
+        "stddev": 618.9715,
+        "min": 642,
+        "max": 2372
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "-2.9",
+      "tokens": "-749"
+    }
+  },
+  "notes": []
+}

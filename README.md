@@ -183,3 +183,4 @@ Reply:
 
 - [ ] Update `coding-journal` wrapped stats handling so stale `~/.claude/stats-cache.json` does not produce outdated usage totals. Detect when `lastComputedDate` is behind recent `~/.claude/projects/**/*.jsonl` activity, then trigger the upstream stats refresh if available or recompute session/message/tool totals from transcripts as a fallback. Token totals may also be recoverable from JSONL usage blocks.
 - [ ] Switch `project-continuity` eval system that better fits the `log-session-summary` use case.
+- [ ] Go through Cursor Marketplace setup.

@@ -3,9 +3,3 @@ model = "gpt-5.5"
 
 [features]
 codex_hooks = true
-
-[plugins."coding-journal@claude-pluginz"]
-enabled = false
-
-[plugins."coding-journal"]
-enabled = false

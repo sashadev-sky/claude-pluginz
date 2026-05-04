@@ -71,6 +71,8 @@ claude-pluginz/
             │   ├── iteration-1/      # eval output workspace
             │   └── iteration-2/      # eval output workspace
             └── log-session-summary/
+                ├── agents/
+    │           │   └── openai.yaml
                 ├── evals/            # skill eval suite
                 │   └── evals.json
                 └── SKILL.md          # skill definition + frontmatter

@@ -1,7 +1,9 @@
 {
   "name": "claude-pluginz",
   "displayName": "Claude Pluginz",
-  "description": "A personal marketplace of bundles of skills",
+  "metadata": {
+    "description": "A marketplace of plugins"
+  },
   "owner": {
     "name": "sashadev-sky"
   },

@@ -1,6 +1,7 @@
 ---
 name: log-session-summary
 description: Append a structured summary of the current session to SESSION_LOG.md. For Claude, use ONLY when the user explicitly invokes the /project-continuity:log-session-summary command; do not trigger on general mentions of session logs, summaries, or project history. For Codex, use ONLY when the user explicitly invokes the $project-continuity:log-session-summary command; do not trigger on general mentions of session logs, summaries, or project history.
+allowed-tools: Bash, Read, Edit
 metadata:
   disable-model-invocation: "true"
 ---

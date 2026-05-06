@@ -1,7 +1,7 @@
 {
   "name": "project-continuity",
   "description": "Collection of project continuity capabilities across sessions.",
-  "version": "1.14.4",
+  "version": "1.14.5",
   "interface": {
     "displayName": "Project Continuity",
     "shortDescription": "Maintain continuity across sessions.",

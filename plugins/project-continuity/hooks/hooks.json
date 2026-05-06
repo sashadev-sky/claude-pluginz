@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 hooks/block-bare-invocation.py"
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/block-bare-invocation.sh"
           }
         ]
       }

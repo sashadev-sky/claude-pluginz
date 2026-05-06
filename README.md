@@ -99,7 +99,6 @@ claude-pluginz/
 │           │   ├── evals/evals.json     # skill eval suite
 │           │   └── SKILL.md
 │           └── log-session-summary-workspace/  # eval output (iteration-1, iteration-2)
-├── SESSION_LOG.md                       # written by $project-continuity:log-session-summary (gitignored)
 └── README.md
 ```
 
@@ -241,4 +240,4 @@ Reply:
 - [ ] Update `coding-journal` wrapped stats handling so stale `~/.claude/stats-cache.json` does not produce outdated usage totals. Detect when `lastComputedDate` is behind recent `~/.claude/projects/**/*.jsonl` activity, then trigger the upstream stats refresh if available or recompute session/message/tool totals from transcripts as a fallback. Token totals may also be recoverable from JSONL usage blocks.
 - [ ] Switch `project-continuity` to an eval system that better fits the `log-session-summary` use case.
 - [ ] Submit to the Cursor Marketplace.
-- [ ] Add Cursor-specific hook configs (`hooks/cursor.json` with `beforeSubmitPrompt` / `preToolUse` events) so the bare-invocation behavior carries over to Cursor IDE.
+- [ ] Add Cursor-specific hook configs (`hooks/cursor.json` with `preToolUse` events) so the bare-invocation behavior carries over to Cursor IDE.
